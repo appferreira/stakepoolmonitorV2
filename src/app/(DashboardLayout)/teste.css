@@ -1,0 +1,68 @@
+.slider-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%; /* Adjust container width as needed */
+}
+
+.slide.block {
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(100px);
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  transition: all 0.5s ease; /* Smoothly collapse */
+  cursor: pointer;
+}
+.slide.checkpoint {
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(100px);
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  transition: all 0.5s ease; /* Smoothly collapse */
+  cursor: pointer;
+}
+
+.fadeSlideInRight {
+  animation-name: fadeSlideInRight;
+}
+
+.fadeOut {
+  animation-name: shrinkOut;
+  animation-duration: 0.5s;
+  transform: translateX(0px);
+  transition: all 0.5s ease; /* Smoothly collapse */
+}
+
+@keyframes fadeSlideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shrinkOut {
+  0% {
+    opacity: 1;
+    width: 100px;
+  }
+  100% {
+    opacity: 0;
+    width: 0px;
+  }
+}
+
+.loadingDatas{
+  opacity: 0.2;
+  transition: all 0.5s ease;
+}
