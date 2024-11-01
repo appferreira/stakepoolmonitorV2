@@ -41,7 +41,7 @@ interface DashboardBlockchainDataCardProps {
 
 const DashboardBlockchainDataCard = ({ data }: DashboardBlockchainDataCardProps) => {
   const validators = useSelector((state) => state.validatorReducer.validators);
-  topcards[0].digits = data?.maticPrice ? "$ " + parseFloat(data.polPrice).toFixed(2).toLocaleString("en-US") : "$ ";
+  topcards[0].digits = data?.maticPrice ? "$ " + Number(parseFloat(data.polPrice).toFixed(2)).toLocaleString("en-US") : "$ ";
   topcards[1].digits = data?.maticMarketCap ? "$ " + Math.round(Number(data.maticMarketCap) + Number(data.polMarketCap)).toLocaleString("en-US") : "$ ";
   topcards[2].digits = data?.totalStaked ? Math.round(Number(data.totalStaked)).toLocaleString("en-US") + " POL" : "0 POL";
   topcards[3].digits = data?.totalDelegators ? Math.round(Number(data.totalDelegators)).toLocaleString("en-US") : "0";

@@ -82,7 +82,7 @@ const TotalCheckpointRewards = ({ data, stakepoolData }: TotalCheckpointRewardsP
     if (data !== null && stakepoolData !== null) {
       setSeriescolumnchart([{
         name: '',
-        data: [Math.floor(Number(stakepoolData.ten_percent_Validators)).toFixed(2)],
+        data: [stakepoolData.ten_percent_Validators],
       }]);
     }
   }, [data]);

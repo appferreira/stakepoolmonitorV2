@@ -130,7 +130,7 @@ const ValidatorOverviewCard = ({ data }: ValidatorOverviewCardProps) => {
                 <Typography variant="subtitle2" fontWeight="600">
                   {
                     // percentage difference from previous month
-                    data !== null ? percentageChange(data[data.length-2].delegators, data[data.length-1].delegators) > 0 ? "+ " + percentageChange(data[data.length-2].delegators, data[data.length-1].delegators) : percentageChange(data[data.length-2].delegators, data[data.length-1].delegators) : 0
+                    data !== null ? Number(percentageChange(data[data.length-2].delegators, data[data.length-1].delegators)) > 0 ? "+ " + percentageChange(data[data.length-2].delegators, data[data.length-1].delegators) : percentageChange(data[data.length-2].delegators, data[data.length-1].delegators) : 0
                   }%
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary">

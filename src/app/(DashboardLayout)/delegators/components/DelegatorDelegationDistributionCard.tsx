@@ -13,7 +13,6 @@ interface ValidatorOverviewCardProps {
 }
 
 const ValidatorOverviewCard = ({ data, delegatorData }: ValidatorOverviewCardProps) => {
-  console.log("delegatorData", delegatorData);
   // chart color
   const theme = useTheme();
   const primary = theme.palette.primary.main;

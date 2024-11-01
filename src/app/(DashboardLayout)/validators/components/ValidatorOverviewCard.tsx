@@ -20,8 +20,6 @@ const ValidatorOverviewCard = ({ data, stakepoolData }: ValidatorOverviewCardPro
   const secondary = theme.palette.secondary.dark;
   const secondaryText = theme.palette.secondary.contrastText;
 
-  console.log("stakepoolData", stakepoolData)
-
   // chart
   const optionscolumnchart: any = {
     chart: {
@@ -76,7 +74,6 @@ const ValidatorOverviewCard = ({ data, stakepoolData }: ValidatorOverviewCardPro
   const [seriescolumnchart, setSeriescolumnchart] = useState<any>([ { name: '', data: [] } ]);
 
   useEffect(() => {
-    console.log(data.sixMonthsBlocks)
     if(data.sixMonthsBlocks !== null && seriescolumnchart[0].data?.sixMonthsBlocks?.length === undefined){
       setSeriescolumnchart([{ name: '', data: data.sixMonthsBlocks.map((item: any) => item.blocks) }]);
     }
@@ -128,7 +125,7 @@ const ValidatorOverviewCard = ({ data, stakepoolData }: ValidatorOverviewCardPro
                   <Chip
                     sx={{ bgcolor: (theme) => theme.palette.primary.dark, color: (theme) => theme.palette.primary.contrastText, borderRadius: '8px', }}
                     size="medium"
-                    label={"+ " + Number(data.blocksMined?.map(item => item.reward).reduce((prev: any, next: any) => prev + next, 0)).toFixed(2) + " POL"}
+                    label={"+ " + Number(data.blocksMined?.map((item: any) => item.reward).reduce((prev: any, next: any) => prev + next, 0)).toFixed(2) + " POL"}
                   />
                 </Stack>
               </Stack>

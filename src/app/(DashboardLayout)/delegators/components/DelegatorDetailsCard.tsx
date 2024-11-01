@@ -7,8 +7,6 @@ interface DelegatorDetailsCardProps {
 }
 
 const DelegatorDetailsCard = ({ data }: DelegatorDetailsCardProps) => {
-  console.log("data")
-  console.log(data)
   return (
     <div style={{position: 'relative'}}>
       <div style={

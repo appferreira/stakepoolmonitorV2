@@ -46,10 +46,10 @@ const CheckpointsProposalCard = ({ data, validators }: CheckpointsProposalCardPr
   const addSlide = () => {
     if (data.length > 0 && validators !== null) {
       const nextBlock = data.find((block: any) => block.number > currentIndex);
-      setSlides(prevSlides => {
+      setSlides((prevSlides: any) => {
         // Remove the first slide if there are 5 or more
         if (prevSlides.length >= 5) {
-          document.getElementById(`slide-${prevSlides[0].number}`).classList.add('fadeOut');
+          document.getElementById(`slide-${prevSlides[0].number}`)?.classList.add('fadeOut');
           setTimeout(() => {
             if(nextBlock){
               prevSlides.push(nextBlock);
@@ -90,7 +90,7 @@ const CheckpointsProposalCard = ({ data, validators }: CheckpointsProposalCardPr
         >
           <section className="blocksSlider">
             <div className="slider-container" id="slider-container" onMouseOver={pause}>
-            {slides.map((slide, index) => (
+            {slides.map((slide: any, index: any) => (
               <HtmlTooltip
                 title={
                   <React.Fragment>
