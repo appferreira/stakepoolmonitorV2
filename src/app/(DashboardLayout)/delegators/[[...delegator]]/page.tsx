@@ -19,12 +19,12 @@ export default function Dashboard ({ params }: { params: { delegator: string } }
   const [delegatorData, setDelegatorData] = useState(null);
   const [delegations, setDelegations] : any = useState([]);
   const getChainData = async () => {
-    const delegatorsData = await axios.get('https://monitor.stakepool.dev.br/api/delegatorsData')
+    const delegatorsData = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/delegatorsData')
     const apr = await axios.get('https://staking-api.polygon.technology/api/v2/rewards/current-apr')
     let selected = delegatorsData.data.filter((delegator: any) => { return delegator.address.toLowerCase() === currentDelegator.toLowerCase() })
     selected[0].apr = Number(apr.data.result).toFixed(2)
     setDelegatorData(selected[0]);
-    const delegatedData = await axios.get('https://monitor.stakepool.dev.br/api/totalDelegatedData')
+    const delegatedData = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/totalDelegatedData')
     setDelegatedData(delegatedData.data)
     const delegatorData = await axios.get('https://staking-api.polygon.technology/api/v2/delegators/' + currentDelegator + '?limit=500')
     let delegationsList = []

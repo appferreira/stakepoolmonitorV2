@@ -65,24 +65,24 @@ export default function Dashboard (){
   // };
   
   // const getBlocksCheckpoints = async () => {
-  //   const realtimeBlocksFromServer = await axios.get('https://monitor.stakepool.dev.br/api/blocksRealtimeData')
+  //   const realtimeBlocksFromServer = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/blocksRealtimeData')
   //   // add realtimeBlocks to realtimeBlocks
   //   setRealtimeBlocks((prevBlocks: any) => mergeNewBlocks(prevBlocks, realtimeBlocksFromServer.data.reverse()));
 
-  //   const realtimeCheckpoints = await axios.get('https://monitor.stakepool.dev.br/api/checkPointsRealtimeData')
+  //   const realtimeCheckpoints = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/checkPointsRealtimeData')
   //   setRealtimeCheckpoints((prevBlocks: any) => mergeNewCheckpoints(prevBlocks, realtimeCheckpoints.data.reverse()));
   // }
 
   const getChainData = async () => {    
-    const stakepoolValidatorRewards = await axios.get('https://monitor.stakepool.dev.br/endpoint')
+    const stakepoolValidatorRewards = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/endpoint')
     setStakepoolValidatorRewards(stakepoolValidatorRewards.data.rewards[0])
-    let chainData = await axios.get('https://monitor.stakepool.dev.br/api/chainData')
+    let chainData = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/chainData')
     setBlockChainData(chainData.data)
-    const checkPointsValidationData = await axios.get('https://monitor.stakepool.dev.br/api/checkpointsValidatorData')
+    const checkPointsValidationData = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/checkpointsValidatorData')
     setCheckPointsValidationData(checkPointsValidationData.data)
-    const totalBlocksRewards = await axios.get('https://monitor.stakepool.dev.br/api/blocksCheckpointsRewards')
+    const totalBlocksRewards = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/blocksCheckpointsRewards')
     setTotalBlocksRewards(totalBlocksRewards.data)
-    const blocksValidation = await axios.get('https://monitor.stakepool.dev.br/api/blocksValidatorData')
+    const blocksValidation = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/blocksValidatorData')
     setBlocksValidation(blocksValidation.data)
   }
 

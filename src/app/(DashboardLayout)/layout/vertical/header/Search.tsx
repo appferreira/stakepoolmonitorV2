@@ -37,7 +37,7 @@ const Search = () => {
   const getChainData = async () => {
     //const rewardsNewData = await axios.get('http://158.220.108.192:6001/endpoint')
     const getValidators = await axios.get('https://staking-api.polygon.technology/api/v2/validators?limit=500&offset=0')
-    const getDelegators = await axios.get('https://monitor.stakepool.dev.br/api/delegatorsData')
+    const getDelegators = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint/api/delegatorsData')
     dispatch(setValidatorStore(getValidators.data.result));
     dispatch(setDelegatorsStore(getDelegators.data));
   }
