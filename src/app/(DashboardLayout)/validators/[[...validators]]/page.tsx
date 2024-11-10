@@ -24,6 +24,16 @@ function findValidatorReward(data: any, validatorAddress: any) {
   return toReturn;
 }
 
+function findValidatorBlocks(data: any, validatorAddress: any) {
+  let toReturn = null;
+  data.forEach(function(validator: any) {
+    if(validator.address.toLowerCase() == validatorAddress.toLowerCase()){
+      toReturn = validator
+    }
+  });
+  return toReturn;
+}
+
 export default function Dashboard ({ params }: { params: { validators: string } }){
   const [isLoading, setLoading] = useState(true);
   const [currentValidator, setCurrentValidator] = useState(params?.validators ? params?.validators[0] ? params?.validators[0] : 32 : 32);
@@ -31,6 +41,7 @@ export default function Dashboard ({ params }: { params: { validators: string } 
   const [sixMonthsBlocks, setSixMonthsBlocks] = useState({sixMonthsBlocks: null, blocksMined: null, checkpointsData: null});
   const [stakedData, setStakedData] = useState(null);
   const [stakepoolValidatorRewards, setStakepoolValidatorRewards] = useState(null);
+  const [blocksValidation, setBlocksValidation] = useState(null);
   const getChainData = async () => {
     const selectedDetails = await axios.get('https://staking-api.polygon.technology/api/v2/validators/' + currentValidator);
     const checkpointsData = await axios.get('https://monitor.vn.stakepool.dev.br/api/checkpointsByValidator?val=' + selectedDetails.data.result.signer)
@@ -49,6 +60,8 @@ export default function Dashboard ({ params }: { params: { validators: string } 
     setStakedData(stakedData.data);
     const stakepoolValidatorRewards = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint')
     setStakepoolValidatorRewards(findValidatorReward(stakepoolValidatorRewards.data, selectedDetails.data.result.signer))
+    const blocksValidation = await axios.get('https://monitor.vn.stakepool.dev.br/validators')
+    setBlocksValidation(findValidatorBlocks(blocksValidation.data, selectedDetails.data.result.signer))
   }
   useEffect(() => {
     if(isLoading){
@@ -65,7 +78,7 @@ export default function Dashboard ({ params }: { params: { validators: string } 
           <Grid item xs={12} sm={6} md={7} lg={7} xl={8}>
           <Grid container spacing={3}>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                <ValidatorOverviewCard data={sixMonthsBlocks} stakepoolData={stakepoolValidatorRewards} />
+                <ValidatorOverviewCard data={sixMonthsBlocks} stakepoolData={stakepoolValidatorRewards} blocksValidation={blocksValidation} />
               </Grid>
               <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                 <ValidatorTotalStakedCard data={stakedData} />

@@ -82,7 +82,9 @@ export default function Dashboard (){
     setCheckPointsValidationData(checkPointsValidationData.data)
     const totalBlocksRewards = await axios.get('https://monitor.vn.stakepool.dev.br/api/blocksCheckpointsRewards')
     setTotalBlocksRewards(totalBlocksRewards.data)
-    const blocksValidation = await axios.get('https://monitor.vn.stakepool.dev.br/api/blocksValidatorData')
+    // const blocksValidation = await axios.get('https://monitor.vn.stakepool.dev.br/api/blocksValidatorData')
+    // setBlocksValidation(blocksValidation.data)
+    const blocksValidation = await axios.get('https://monitor.vn.stakepool.dev.br/validators')
     setBlocksValidation(blocksValidation.data)
   }
 

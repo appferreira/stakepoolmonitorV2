@@ -79,7 +79,7 @@ const BlocksByValidator = ({ data }: BlocksByValidatorProps) => {
   const [seriescolumnchart, setSeriescolumnchart] = useState<any>([]);
   useEffect(() => {
     if(data !== null && seriescolumnchart.length === 0){
-      setSeriescolumnchart(data.map((item: any) => item.count))
+      setSeriescolumnchart(data.map((item: any) => item.number_blocks_24h))
     }
   },[data]);
 

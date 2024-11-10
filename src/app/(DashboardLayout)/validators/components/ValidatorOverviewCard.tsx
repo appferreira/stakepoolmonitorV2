@@ -9,10 +9,11 @@ import { useEffect, useState } from "react";
 
 interface ValidatorOverviewCardProps {
   data: any,
-  stakepoolData: any
+  stakepoolData: any,
+  blocksValidation: any
 }
 
-const ValidatorOverviewCard = ({ data, stakepoolData }: ValidatorOverviewCardProps) => {
+const ValidatorOverviewCard = ({ data, stakepoolData, blocksValidation }: ValidatorOverviewCardProps) => {
   // chart color
   const theme = useTheme();
   const primary = theme.palette.primary.dark;
@@ -114,7 +115,7 @@ const ValidatorOverviewCard = ({ data, stakepoolData }: ValidatorOverviewCardPro
                     <Box>
                       <Typography variant="h6" mb="4px">
                         {
-                          data.sixMonthsBlocks !== null ? data.blocksMined.length : 0
+                          blocksValidation !== null ? blocksValidation.number_blocks_24h : 0
                         } Blocks Validated
                       </Typography>
                       <Typography variant="subtitle2" color="textSecondary">
@@ -125,7 +126,7 @@ const ValidatorOverviewCard = ({ data, stakepoolData }: ValidatorOverviewCardPro
                   <Chip
                     sx={{ bgcolor: (theme) => theme.palette.primary.dark, color: (theme) => theme.palette.primary.contrastText, borderRadius: '8px', }}
                     size="medium"
-                    label={"+ " + Number(data.blocksMined?.map((item: any) => item.reward).reduce((prev: any, next: any) => prev + next, 0)).toFixed(2) + " POL"}
+                    label={"+ " + Number(blocksValidation !== null ? blocksValidation.rewards_24h : 0).toFixed(2) + " POL"}
                   />
                 </Stack>
               </Stack>
