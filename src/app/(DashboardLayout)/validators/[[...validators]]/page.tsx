@@ -43,12 +43,14 @@ export default function Dashboard ({ params }: { params: { validators: string } 
   const [stakepoolValidatorRewards, setStakepoolValidatorRewards] = useState(null);
   const [blocksValidation, setBlocksValidation] = useState(null);
   const getChainData = async () => {
-    const selectedDetails = await axios.get('https://staking-api.polygon.technology/api/v2/validators/' + currentValidator);
-    const checkpointsData = await axios.get('https://monitor.vn.stakepool.dev.br/api/checkpointsByValidator?val=' + selectedDetails.data.result.signer)
-    selectedDetails.data.result.proposedCheckpoints = checkpointsData.data.proposedCheckpoints
-    setSelectedValidator(selectedDetails.data.result);
-    const blocksMined = await axios.get('https://monitor.vn.stakepool.dev.br/api/lastBlocksByValidator?val=' + selectedDetails.data.result.signer)
-    const sixMonthsBlocks = await axios.get('https://monitor.vn.stakepool.dev.br/api/monthlyBlocksByValidator?val=' + selectedDetails.data.result.signer)
+    const allValidators = await axios.get('https://staking-api.polygon.technology/api/v2/validators/?page=1&limit=105')
+    const selectedDetails = allValidators.data.result.find((validator: any) => validator.id == currentValidator)
+    console.log(selectedDetails)
+    const checkpointsData = await axios.get('https://monitor.vn.stakepool.dev.br/api/checkpointsByValidator?val=' + selectedDetails.signer)
+    selectedDetails.proposedCheckpoints = checkpointsData.data.proposedCheckpoints
+    setSelectedValidator(selectedDetails);
+    const blocksMined = await axios.get('https://monitor.vn.stakepool.dev.br/api/lastBlocksByValidator?val=' + selectedDetails.signer)
+    const sixMonthsBlocks = await axios.get('https://monitor.vn.stakepool.dev.br/api/monthlyBlocksByValidator?val=' + selectedDetails.signer)
     setSixMonthsBlocks(
         {
           'sixMonthsBlocks': sixMonthsBlocks.data,
@@ -56,12 +58,12 @@ export default function Dashboard ({ params }: { params: { validators: string } 
           'checkpointsData': checkpointsData.data
         }
       )
-    const stakedData = await axios.get('https://monitor.vn.stakepool.dev.br/api/validatorStaked?val=' + selectedDetails.data.result.signer)  
+    const stakedData = await axios.get('https://monitor.vn.stakepool.dev.br/api/validatorStaked?val=' + selectedDetails.signer)  
     setStakedData(stakedData.data);
     const stakepoolValidatorRewards = await axios.get('https://monitor.vn.stakepool.dev.br/endpoint')
-    setStakepoolValidatorRewards(findValidatorReward(stakepoolValidatorRewards.data, selectedDetails.data.result.signer))
+    setStakepoolValidatorRewards(findValidatorReward(stakepoolValidatorRewards.data, selectedDetails.signer))
     const blocksValidation = await axios.get('https://monitor.vn.stakepool.dev.br/validators')
-    setBlocksValidation(findValidatorBlocks(blocksValidation.data, selectedDetails.data.result.signer))
+    setBlocksValidation(findValidatorBlocks(blocksValidation.data, selectedDetails.signer))
   }
   useEffect(() => {
     if(isLoading){
