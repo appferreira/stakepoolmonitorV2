@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from '@/store/hooks';
 
 export default function Dashboard ({ params }: { params: { delegator: string } }){
   const validators = useSelector((state) => state.validatorReducer.validators);
-  const [currentDelegator, setCurrentDelegator] = useState(params?.delegator ? params?.delegator[0] ? params?.delegator[0] : '0x40730f34668afcb3884f050cbc3d376a444bbe44' : '0x40730f34668afcb3884f050cbc3d376a444bbe44');
+  const [currentDelegator, setCurrentDelegator] = useState(params?.delegator ? params?.delegator[0] ? params?.delegator[0] : '0x8287F469726a95DEdE7cfF1EA3b24a34A12e88F0' : '0x8287F469726a95DEdE7cfF1EA3b24a34A12e88F0');
   const [isLoading, setLoading] = useState(true);
   const [delegatedData, setDelegatedData] = useState(null);
   const [delegatorData, setDelegatorData] = useState(null);
